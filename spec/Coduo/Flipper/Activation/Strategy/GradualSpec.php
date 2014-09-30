@@ -35,4 +35,5 @@ class GradualSpec extends ObjectBehavior
         $this->isActive($feature, new TestUser(99))->shouldReturn(true);
         $this->isActive($feature, new TestUser(100))->shouldReturn(true);
     }
+
 }
