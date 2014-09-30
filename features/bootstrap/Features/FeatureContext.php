@@ -26,7 +26,7 @@ class FeatureContext implements SnippetAcceptingContext
     public function __construct()
     {
         $this->flipper = new Flipper(new InMemoryFeatureRepository());
-        $this->users = [];
+        $this->users = array();
     }
 
     /**
@@ -35,7 +35,7 @@ class FeatureContext implements SnippetAcceptingContext
     public function clenup(BeforeScenarioScope $scope)
     {
         $this->flipper = new Flipper(new InMemoryFeatureRepository());
-        $this->users = [];
+        $this->users = array();
     }
 
     /**
