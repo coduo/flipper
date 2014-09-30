@@ -4,6 +4,8 @@ namespace Features;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Coduo\Flipper;
@@ -19,8 +21,18 @@ class FeatureContext implements SnippetAcceptingContext
 {
     private $flipper;
     private $users;
+    private $currentFeature;
 
     public function __construct()
+    {
+        $this->flipper = new Flipper(new InMemoryFeatureRepository());
+        $this->users = [];
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function clenup(BeforeScenarioScope $scope)
     {
         $this->flipper = new Flipper(new InMemoryFeatureRepository());
         $this->users = [];
@@ -33,6 +45,17 @@ class FeatureContext implements SnippetAcceptingContext
     {
         foreach ($table->getHash() as $user) {
             $this->users[] = new TestUser($user['Flipper identifier']);
+        }
+    }
+
+    /**
+     * @Given there are :count users
+     */
+    public function thereAreUsers($count)
+    {
+        $count = $count;
+        foreach (range(1, $count) as $i) {
+            $this->users[] = new TestUser($i);
         }
     }
 
@@ -51,6 +74,41 @@ class FeatureContext implements SnippetAcceptingContext
             $this->flipper->add($feature);
         }
 
+    }
+
+    /**
+     * @Then I set up feature :arg1 for :arg2 percent of users
+     */
+    public function iSetUpFeatureForPercentOfUsers($featureName, $percentage)
+    {
+        $feature = new Feature($featureName, new Strategy\Gradual($percentage));
+        $this->flipper->add($feature);
+        $this->currentFeature = $feature;
+    }
+
+    /**
+     * @Then about :count users should see the feature
+     */
+    public function aboutUsersShouldSeeTheFeature($count)
+    {
+        $activated = 0;
+
+        foreach ($this->users as $user) {
+            if ($this->flipper->isActive($this->currentFeature->getName(), $user)) {
+                $activated++;
+            }
+        }
+
+        $thresholdLower = $activated - ($activated * 0.10);
+        $thresholdUpper = $activated + ($activated * 0.10);
+
+        if (($activated - $thresholdLower) / $activated > 0.11) {
+            throw new \Exception();
+        }
+
+        if (($thresholdUpper - $activated) / $thresholdUpper > 0.11) {
+            throw new \Exception();
+        }
     }
 
     /**

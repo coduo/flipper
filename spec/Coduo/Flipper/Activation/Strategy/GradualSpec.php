@@ -35,24 +35,4 @@ class GradualSpec extends ObjectBehavior
         $this->isActive($feature, new TestUser(99))->shouldReturn(true);
         $this->isActive($feature, new TestUser(100))->shouldReturn(true);
     }
-
-    function it_should_work_for_percentage_of_users(Feature $feature)
-    {
-        $this->beConstructedWith(50);
-
-        $activated = 0;
-        foreach (range(0, 120) as $id) {
-            if ($this->getWrappedObject()->isActive($feature->getWrappedObject(), new TestUser($id))) {
-                $activated++;
-            }
-        }
-
-        if ($activated < 58) {
-            throw new \Exception('Value too low');
-        }
-
-        if ($activated > 62) {
-            throw new \Exception('Value too high');
-        }
-    }
 }

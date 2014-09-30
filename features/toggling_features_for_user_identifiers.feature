@@ -2,20 +2,15 @@ Feature: Toggling features for user identifiers
   In order be able to deploy source code often
   I want to be able toggle features for given users
 
-  Background:
-    Given following users exist:
-      | Flipper identifier         |
-      | michal                     |
-      | claudio                    |
-      | norbert                    |
 
-  Scenario: Activating features for users
-    When following features are set up:
-      | Feature          | Users                |
-      | captcha          | claudio, norbert     |
-      | chat             | michal               |
-      | popup            | norbert              |
+  Scenario Outline: Activating features for percentage of users
+    When there are <usersCount> users
+    Then I set up feature <feature> for <percentage> percent of users
+    And about <estTotal> users should see the feature
 
-    Then the feature "captcha" should be active for user "claudio"
-    And the feature "chat" should be active for user "michal"
-    And the feature "popup" should not be active for user "michal"
+    Examples:
+    | usersCount | feature   | percentage | estTotal   |
+    |  12        | captcha   |  50        | 6          |
+    |  100       | captcha   |  10        | 10         |
+    |  200       | captcha   |  15        | 30         |
+    |  1000      | captcha   |  18        | 180        |
