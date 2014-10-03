@@ -4,6 +4,7 @@ namespace Coduo;
 
 use Coduo\Flipper\Feature\Repository;
 use Coduo\Flipper\Feature;
+use Coduo\Flipper\Identifier;
 use Coduo\Flipper\User\FeatureAwareUser;
 
 class Flipper
@@ -45,13 +46,13 @@ class Flipper
      *
      * @throws \RuntimeException
      */
-    public function isActive($featureName, FeatureAwareUser $user)
+    public function isActive($featureName, Identifier $identifier)
     {
         $feature = $this->findByName($featureName);
         if (null === $feature) {
             throw new \RuntimeException();
         }
 
-        return $feature->isActive($user);
+        return $feature->isActive($identifier);
     }
 }

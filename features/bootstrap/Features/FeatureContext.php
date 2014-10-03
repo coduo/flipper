@@ -94,7 +94,7 @@ class FeatureContext implements SnippetAcceptingContext
         $activated = 0;
 
         foreach ($this->users as $user) {
-            if ($this->flipper->isActive($this->currentFeature->getName(), $user)) {
+            if ($this->flipper->isActive($this->currentFeature->getName(), $user->getFlipperIdentifier())) {
                 $activated++;
             }
         }
@@ -117,7 +117,7 @@ class FeatureContext implements SnippetAcceptingContext
     public function theFeatureShouldBeActivateForUser($featureName, $userName)
     {
         $user = $this->findUser($userName);
-        expect($this->flipper->isActive($featureName, $user))->toBe(true);
+        expect($this->flipper->isActive($featureName, $user->getFlipperIdentifier()))->toBe(true);
     }
 
     /**
@@ -126,7 +126,7 @@ class FeatureContext implements SnippetAcceptingContext
     public function theFeatureShouldNotBeActiveForUser($featureName, $userName)
     {
         $user = $this->findUser($userName);
-        expect($this->flipper->isActive($featureName, $user))->toBe(false);
+        expect($this->flipper->isActive($featureName, $user->getFlipperIdentifier()))->toBe(false);
     }
 
     /**
@@ -135,7 +135,7 @@ class FeatureContext implements SnippetAcceptingContext
     protected function findUser($userName)
     {
         foreach ($this->users as $user) {
-            if ($user->getFlipperIdentifier() === $userName) {
+            if ((String) $user->getFlipperIdentifier() === $userName) {
                 return $user;
             }
         }

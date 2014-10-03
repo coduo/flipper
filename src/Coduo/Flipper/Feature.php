@@ -38,8 +38,8 @@ class Feature
         return $this->users;
     }
 
-    public function isActive(FeatureAwareUser $user)
+    public function isActive(Identifier $identifier)
     {
-        return $this->strategy->isActive($this, $user);
+        return $this->strategy->isActive($this, $identifier);
     }
 }
