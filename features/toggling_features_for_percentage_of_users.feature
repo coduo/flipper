@@ -9,7 +9,7 @@ Feature: Toggling features for percentage of users
 
   Examples:
     | usersCount | feature   | percentage | estTotal   |
-    |  12        | captcha   |  50        | 6          |
+    |  60        | captcha   |  50        | 30         |
     |  100       | captcha   |  10        | 10         |
     |  200       | captcha   |  15        | 30         |
     |  1000      | captcha   |  18        | 180        |
