@@ -41,7 +41,7 @@ class Flipper
 
     /**
      * @param $featureName
-     * @param FeatureAwareUser $user
+     * @param  FeatureAwareUser $user
      * @return boolean
      *
      * @throws \RuntimeException

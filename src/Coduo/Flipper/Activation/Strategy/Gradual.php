@@ -5,7 +5,6 @@ namespace Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
-use Coduo\Flipper\User\FeatureAwareUser;
 
 class Gradual implements Strategy
 {
@@ -13,7 +12,7 @@ class Gradual implements Strategy
 
     public function __construct($percentage)
     {
-        $this->percentage = (int)$percentage;
+        $this->percentage = (int) $percentage;
     }
 
     public function isActive(Feature $feature, Identifier $identifier)

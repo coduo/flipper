@@ -8,7 +8,7 @@ interface Repository
 {
 
     /**
-     * @param Feature $feature
+     * @param  Feature $feature
      * @return null
      */
     public function add(Feature $feature);

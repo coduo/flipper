@@ -5,7 +5,6 @@ namespace Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Identifier;
-use Coduo\Flipper\User\FeatureAwareUser;
 
 class UserFlipperIdentifier implements Strategy
 {

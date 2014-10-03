@@ -102,8 +102,6 @@ class FeatureContext implements SnippetAcceptingContext
         $thresholdLower = array($activated - ($activated * 0.10), $count - ($count * 0.10));
         $thresholdUpper = array($activated + ($activated * 0.10), $count + ($count * 0.10));
 
-
-
         if ((max($thresholdLower) - min($thresholdLower)) / max($thresholdLower) > 0.10) {
             throw new \Exception();
         }
