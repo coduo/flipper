@@ -4,14 +4,15 @@ namespace Coduo\Flipper\Activation\Strategy;
 
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Activation\Strategy;
+use Coduo\Flipper\Identifier;
 use Coduo\Flipper\User\FeatureAwareUser;
 
 class UserFlipperIdentifier implements Strategy
 {
-    public function isActive(Feature $feature, FeatureAwareUser $user)
+    public function isActive(Feature $feature, Identifier $identifier)
     {
         foreach ($feature->getUsers() as $featureUser) {
-            if ($user->getFlipperIdentifier() === $featureUser->getFlipperIdentifier()) {
+            if ((String) $identifier === (String)$featureUser->getFlipperIdentifier()) {
                 return true;
             }
         }

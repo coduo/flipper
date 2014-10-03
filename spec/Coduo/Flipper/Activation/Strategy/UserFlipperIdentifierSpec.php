@@ -3,6 +3,7 @@
 namespace spec\Coduo\Flipper\Activation\Strategy;
 
 use Coduo\Flipper\Feature;
+use Coduo\Flipper\Identifier;
 use Coduo\Tests\Flipper\TestUser;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -18,13 +19,13 @@ class UserFlipperIdentifierSpec extends ObjectBehavior
     {
         $user = new TestUser('michal');
         $feature->getUsers()->willReturn(array($user));
-        $this->isActive($feature, $user)->shouldReturn(true);
+        $this->isActive($feature, $user->getFlipperIdentifier())->shouldReturn(true);
     }
 
     function it_is_not_active_for_users_who_doesnt_belong_to_feature(Feature $feature)
     {
         $user = new TestUser('michal');
         $feature->getUsers()->willReturn(array($user));
-        $this->isActive($feature, new TestUser('claudio'))->shouldReturn(false);
+        $this->isActive($feature, new Identifier('claudio'))->shouldReturn(false);
     }
 }
