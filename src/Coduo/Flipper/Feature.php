@@ -19,7 +19,7 @@ class Feature
     public function __construct($name, Strategy $strategy)
     {
         $this->name = $name;
-        $this->users = array();
+        $this->identifiers = array();
         $this->strategy = $strategy;
     }
 
