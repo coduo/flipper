@@ -9,7 +9,7 @@ class Feature
 {
     private $name;
 
-    private $users;
+    private $identifiers;
 
     /**
      * @var Activation\Strategy
@@ -28,14 +28,14 @@ class Feature
         return $this->name;
     }
 
-    public function addUser(FeatureAwareUser $user)
+    public function addIdentifier(Identifier $identifier)
     {
-        $this->users[] = $user;
+        $this->identifiers[] = $identifier;
     }
 
-    public function getUsers()
+    public function getIdentifiers()
     {
-        return $this->users;
+        return $this->identifiers;
     }
 
     public function isActive(Identifier $identifier)

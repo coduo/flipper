@@ -10,8 +10,9 @@ class UserFlipperIdentifier implements Strategy
 {
     public function isActive(Feature $feature, Identifier $identifier)
     {
-        foreach ($feature->getUsers() as $featureUser) {
-            if ((String) $identifier === (String)$featureUser->getFlipperIdentifier()) {
+        foreach ($feature->getIdentifiers() as $fid) {
+            if ($identifier->isEqualTo($fid)) {
+
                 return true;
             }
         }

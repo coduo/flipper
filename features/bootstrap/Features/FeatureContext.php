@@ -68,7 +68,7 @@ class FeatureContext implements SnippetAcceptingContext
             $feature = new Feature($featureData['Feature'], new Strategy\UserFlipperIdentifier());
             foreach (explode(',', $featureData['Users']) as $userName) {
                 $user = $this->findUser(trim($userName));
-                $feature->addUser($user);
+                $feature->addIdentifier($user->getFlipperIdentifier());
             }
 
             $this->flipper->add($feature);

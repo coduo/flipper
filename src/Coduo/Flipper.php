@@ -41,10 +41,10 @@ class Flipper
 
     /**
      * @param $featureName
-     * @param  FeatureAwareUser $user
-     * @return boolean
-     *
+     * @param Identifier $identifier
      * @throws \RuntimeException
+     *
+     * @return boolean
      */
     public function isActive($featureName, Identifier $identifier)
     {

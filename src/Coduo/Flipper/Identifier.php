@@ -15,4 +15,9 @@ class Identifier
     {
         return (String)$this->identifier;
     }
+
+    public function isEqualTo(Identifier $id)
+    {
+        return $this->identifier === (String) $id;
+    }
 }
