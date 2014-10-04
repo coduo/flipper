@@ -64,11 +64,13 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function followingFeaturesAreSetUp(TableNode $table)
     {
+
         foreach ($table->getHash() as $featureData) {
-            $feature = new Feature($featureData['Feature'], new Strategy\UserFlipperIdentifier());
+            $strategy = new Strategy\UserFlipperIdentifier();
+            $feature = new Feature($featureData['Feature'], $strategy);
             foreach (explode(',', $featureData['Users']) as $userName) {
                 $user = $this->findUser(trim($userName));
-                $feature->addIdentifier($user->getFlipperIdentifier());
+                $strategy->addIdentifier($user->getFlipperIdentifier());
             }
 
             $this->flipper->add($feature);

@@ -28,16 +28,6 @@ class Feature
         return $this->name;
     }
 
-    public function addIdentifier(Identifier $identifier)
-    {
-        $this->identifiers[] = $identifier;
-    }
-
-    public function getIdentifiers()
-    {
-        return $this->identifiers;
-    }
-
     public function isActive(Identifier $identifier)
     {
         return $this->strategy->isActive($this, $identifier);
