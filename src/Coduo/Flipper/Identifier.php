@@ -4,8 +4,15 @@ namespace Coduo\Flipper;
 
 class Identifier
 {
+    /**
+     * @var mixed
+     */
     private $identifier;
 
+    /**
+     * @param $identifier
+     * @throws \InvalidArgumentException
+     */
     public function __construct($identifier)
     {
         if (null === $identifier || 0 === strlen($identifier)) {
@@ -15,11 +22,18 @@ class Identifier
         $this->identifier = $identifier;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (String)$this->identifier;
     }
 
+    /**
+     * @param Identifier $id
+     * @return bool
+     */
     public function isEqualTo(Identifier $id)
     {
         return $this->identifier === (String) $id;

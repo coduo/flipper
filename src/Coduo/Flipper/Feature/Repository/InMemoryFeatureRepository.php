@@ -10,7 +10,7 @@ class InMemoryFeatureRepository implements Repository
     private $features = array();
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function add(Feature $feature)
     {
@@ -18,7 +18,7 @@ class InMemoryFeatureRepository implements Repository
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function findByName($name)
     {

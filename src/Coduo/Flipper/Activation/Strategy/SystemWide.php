@@ -13,11 +13,17 @@ class SystemWide implements Strategy
      */
     private $isActive;
 
+    /**
+     * @param $isActive
+     */
     public function __construct($isActive)
     {
         $this->isActive = (bool) $isActive;
     }
 
+    /**
+     * {inheritdoc}
+     */
     public function isActive(Feature $feature, Identifier $identifier)
     {
         return $this->isActive;

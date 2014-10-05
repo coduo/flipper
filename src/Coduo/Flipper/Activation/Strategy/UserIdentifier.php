@@ -13,6 +13,11 @@ class UserIdentifier implements Strategy
      */
     private $identifiers;
 
+    /**
+     * @param Identifier[] $identifiers
+     *
+     * @throws \InvalidArgumentException
+     */
     public function __construct(array $identifiers = array())
     {
         foreach ($identifiers as $identifier) {
@@ -23,11 +28,17 @@ class UserIdentifier implements Strategy
         $this->identifiers = $identifiers;
     }
 
+    /**
+     * @param Identifier $identifier
+     */
     public function addIdentifier(Identifier $identifier)
     {
         $this->identifiers[] = $identifier;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isActive(Feature $feature, Identifier $identifier)
     {
         foreach ($this->identifiers as $fid) {
