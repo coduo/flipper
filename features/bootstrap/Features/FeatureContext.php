@@ -66,7 +66,7 @@ class FeatureContext implements SnippetAcceptingContext
     {
 
         foreach ($table->getHash() as $featureData) {
-            $strategy = new Strategy\UserFlipperIdentifier();
+            $strategy = new Strategy\UserIdentifier();
             $feature = new Feature($featureData['Feature'], $strategy);
             foreach (explode(',', $featureData['Users']) as $userName) {
                 $user = $this->findUser(trim($userName));

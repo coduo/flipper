@@ -8,11 +8,11 @@ use Coduo\Tests\Flipper\TestUser;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class UserFlipperIdentifierSpec extends ObjectBehavior
+class UserIdentifierSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Coduo\Flipper\Activation\Strategy\UserFlipperIdentifier');
+        $this->shouldHaveType('Coduo\Flipper\Activation\Strategy\UserIdentifier');
     }
 
     function it_is_active_for_user_by_flipper_identifier(Feature $feature)
