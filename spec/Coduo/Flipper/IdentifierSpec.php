@@ -28,4 +28,13 @@ class IdentifierSpec extends ObjectBehavior
         $id = new Identifier('foo');
         $this->isEqualTo($id)->shouldReturn(false);
     }
+
+    function it_cannot_be_empty()
+    {
+        $this->shouldThrow(new \InvalidArgumentException("Identifier cannot be empty"))
+            ->during('__construct', array(null));
+
+        $this->shouldThrow(new \InvalidArgumentException("Identifier cannot be empty"))
+            ->during('__construct', array(""));
+    }
 }

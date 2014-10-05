@@ -15,6 +15,11 @@ class UserIdentifier implements Strategy
 
     public function __construct(array $identifiers = array())
     {
+        foreach ($identifiers as $identifier) {
+            if (false === $identifier instanceof Identifier) {
+                throw new \InvalidArgumentException("Only instance of Identifier is accepted by UserIdentifier strategy");
+            }
+        }
         $this->identifiers = $identifiers;
     }
 

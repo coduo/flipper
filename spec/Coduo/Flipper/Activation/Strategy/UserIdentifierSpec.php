@@ -28,4 +28,10 @@ class UserIdentifierSpec extends ObjectBehavior
         $this->addIdentifier($identifier);
         $this->isActive($feature, new Identifier('claudio'))->shouldReturn(false);
     }
+
+    function it_can_only_accept_identifiers_as_constructor_parameter()
+    {
+        $this->shouldThrow(new \InvalidArgumentException("Only instance of Identifier is accepted by UserIdentifier strategy"))
+            ->during('__construct', array(array('fooo')));
+    }
 }
