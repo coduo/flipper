@@ -20,7 +20,7 @@ use Coduo\Flipper\Activation\Strategy;
 $flipper = new Flipper(new InMemoryFeatureRepository())
 $feature = new Feature('captcha', new Strategy\UserIdentifier(
     new Identifier('michal@coduo.pl')
-));
+]));
 $feature2 = new Feature('new_topbar', new Strategy\SystemWide(true));
 $flipper->add($feature);
 $flipper->add($feature2)
