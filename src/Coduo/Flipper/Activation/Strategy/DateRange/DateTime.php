@@ -2,7 +2,6 @@
 
 namespace Coduo\Flipper\Activation\Strategy\DateRange;
 
-use DateTimeImmutable;
 
 class DateTime
 {
@@ -12,7 +11,7 @@ class DateTime
     const FORMAT = 'Y-m-d H:i:s';
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTime
      */
     protected $date;
 
@@ -21,11 +20,11 @@ class DateTime
      */
     public function __construct($dateString)
     {
-        $this->date = new DateTimeImmutable($dateString);
+        $this->date = new \DateTime($dateString);
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTime
      */
     public function getDate()
     {

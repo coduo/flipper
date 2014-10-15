@@ -11,7 +11,7 @@ class CurrentDateTimeSpec extends ObjectBehavior
 
     function it_is_now_by_default()
     {
-        $now = new \DateTimeImmutable("now");
+        $now = new \DateTime("now");
         $this->getDate()->shouldBeLike($now);
     }
 
@@ -25,7 +25,7 @@ class CurrentDateTimeSpec extends ObjectBehavior
 
     function modifyCurrentDateTime()
     {
-        $date = new \DateTimeImmutable("2014-10-15 18:00:00");
+        $date = new \DateTime("2014-10-15 18:00:00");
         CurrentDateTime::modifyDate($date);
     }
 }

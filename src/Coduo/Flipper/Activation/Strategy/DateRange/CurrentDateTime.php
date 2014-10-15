@@ -2,33 +2,31 @@
 
 namespace Coduo\Flipper\Activation\Strategy\DateRange;
 
-use DateTimeImmutable;
-
 /**
  * @internal Do not init outside DateRange class
  */
 class CurrentDateTime extends DateTime
 {
     /**
-     * @var DateTimeImmutable|null
+     * @var DateTime|null
      */
     private static $modifiedDate;
 
     /**
      * Generally, use it only for tests :P
      *
-     * @param DateTimeImmutable $date
+     * @param DateTime $date
      */
-    public static function modifyDate(DateTimeImmutable $date)
+    public static function modifyDate(\DateTime $date)
     {
         static::$modifiedDate = $date;
     }
-    
+
     /**
      *
      */
     public function __construct()
     {
-        $this->date = null === static::$modifiedDate ? new DateTimeImmutable("now") : static::$modifiedDate;
+        $this->date = null === static::$modifiedDate ? new \DateTime("now") : static::$modifiedDate;
     }
 }

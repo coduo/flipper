@@ -55,7 +55,7 @@ class DateRangeSpec extends ObjectBehavior
 
     function modifyCurrentDate()
     {
-        $date = new \DateTimeImmutable("2014-10-15 18:00:00");
+        $date = new \DateTime("2014-10-15 18:00:00");
         CurrentDateTime::modifyDate($date);
     }
 }
