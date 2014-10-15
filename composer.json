@@ -19,7 +19,8 @@
     "require-dev": {
         "phpspec/phpspec": "2.0.*",
         "bossa/phpspec2-expect": "dev-master",
-        "behat/behat": "3.0.*"
+        "behat/behat": "3.0.*",
+        "coduo/phpspec-prepare-extension": "dev-master"
     },
     "config": {
         "bin-dir": "bin"
