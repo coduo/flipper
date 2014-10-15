@@ -8,14 +8,14 @@ namespace Coduo\Flipper\Activation\Strategy\DateRange;
 final class CurrentDateTime extends DateTime
 {
     /**
-     * @var DateTime|null
+     * @var \DateTime|null
      */
     private static $modifiedDate;
 
     /**
      * Generally, use it only for tests :P
      *
-     * @param DateTime $date
+     * @param \DateTime $date
      */
     public static function modifyDate(\DateTime $date)
     {
@@ -27,6 +27,6 @@ final class CurrentDateTime extends DateTime
      */
     public function __construct()
     {
-        $this->date = null === static::$modifiedDate ? new \DateTime("now") : self::$modifiedDate;
+        $this->date = null === self::$modifiedDate ? new \DateTime("now") : self::$modifiedDate;
     }
 }
