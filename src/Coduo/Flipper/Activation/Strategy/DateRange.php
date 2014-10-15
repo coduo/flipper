@@ -11,12 +11,12 @@ use Coduo\Flipper\Identifier;
 class DateRange implements Strategy
 {
     /**
-     * @var DateRange\DateTime
+     * @var DateTime
      */
     private $from;
 
     /**
-     * @var DateRange\DateTime
+     * @var DateTime
      */
     private $to;
 
@@ -33,22 +33,6 @@ class DateRange implements Strategy
 
         $this->from = $from;
         $this->to = $to;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function from()
-    {
-        return $this->from;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function to()
-    {
-        return $this->to;
     }
 
     /**

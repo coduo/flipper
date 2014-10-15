@@ -16,8 +16,6 @@ class DateRangeSpec extends ObjectBehavior
         $from = new DateTime("2014-01-01");
         $to = new DateTime("2014-01-15");
         $this->beConstructedWith($from, $to);
-        $this->from()->shouldReturn($from);
-        $this->to()->shouldReturn($to);
     }
 
     function it_throws_exception_when_to_is_lesser_than_from()
