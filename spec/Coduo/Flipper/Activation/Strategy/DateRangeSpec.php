@@ -23,7 +23,7 @@ class DateRangeSpec extends ObjectBehavior
     function it_throws_exception_when_to_is_lesser_than_from()
     {
         $this->shouldThrow(new \InvalidArgumentException("Date range invalid. End needs to be greater than start."))
-            ->during('__construct', [new DateTime("2014-02-01"), new DateTime("2014-01-01")]);
+            ->during('__construct', array(new DateTime("2014-02-01"), new DateTime("2014-01-01")));
     }
 
     /**
