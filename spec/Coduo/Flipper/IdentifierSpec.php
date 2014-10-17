@@ -22,6 +22,13 @@ class IdentifierSpec extends ObjectBehavior
         $this->isEqualTo($id)->shouldReturn(true);
     }
 
+    function it_can_compare_succesfully_to_numeric()
+    {
+        $this->beConstructedWith(1);
+        $id = new Identifier(1);
+        $this->isEqualTo($id)->shouldReturn(true);
+    }
+
     function it_can_compare_unsuccesfully_if_id_is_different()
     {
         $this->beConstructedWith('whateva');

@@ -27,7 +27,7 @@ class Identifier
      */
     public function __toString()
     {
-        return (String)$this->identifier;
+        return (String) $this->identifier;
     }
 
     /**
@@ -36,6 +36,6 @@ class Identifier
      */
     public function isEqualTo(Identifier $id)
     {
-        return $this->identifier === (String) $id;
+        return (String) $this->identifier === (String) $id;
     }
 }
