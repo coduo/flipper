@@ -1,5 +1,6 @@
 Feature: Toggling features for percentage of users
   In order be able to test new features
+  As a developer
   I want to be able toggle features for percentage of users users
 
   Scenario Outline: Activating features for percentage of users

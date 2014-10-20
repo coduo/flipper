@@ -22,7 +22,7 @@ class IdentifierSpec extends ObjectBehavior
         $this->isEqualTo($id)->shouldReturn(true);
     }
 
-    function it_can_compare_succesfully_to_numeric()
+    function it_can_compare_succesfully_to_numeric_ids()
     {
         $this->beConstructedWith(1);
         $id = new Identifier(1);

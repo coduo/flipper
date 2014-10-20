@@ -1,5 +1,6 @@
 Feature: Toggling features for user identifiers
   In order be able to deploy source code often
+  As a developer
   I want to be able toggle features for given users
 
   Background:

@@ -9,6 +9,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Coduo\Flipper;
+use Coduo\Flipper\Activation\Strategy\DateRange\CurrentDateTime;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Feature\Repository\InMemoryFeatureRepository;
 use Coduo\Tests\Flipper\TestUser;
@@ -36,6 +37,7 @@ class FeatureContext implements SnippetAcceptingContext
     {
         $this->flipper = new Flipper(new InMemoryFeatureRepository());
         $this->users = array();
+        CurrentDateTime::reset();
     }
 
     /**
@@ -79,13 +81,25 @@ class FeatureContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I set up feature :arg1 for :arg2 percent of users
+     * @Then I set up feature :featureName for :percentage percent of users
      */
     public function iSetUpFeatureForPercentOfUsers($featureName, $percentage)
     {
         $feature = new Feature($featureName, new Strategy\Gradual($percentage));
         $this->flipper->add($feature);
         $this->currentFeature = $feature;
+    }
+
+    /**
+     * @Given the :featureName feature exist for range :from - :to
+     */
+    public function theFeatureExistForRange($featureName, $from, $to)
+    {
+        $feature = new Feature($featureName, new Strategy\DateRange(
+            new Strategy\DateRange\DateTime($from),
+            new Strategy\DateRange\DateTime($to))
+        );
+        $this->flipper->add($feature);
     }
 
     /**
@@ -129,6 +143,30 @@ class FeatureContext implements SnippetAcceptingContext
     {
         $user = $this->findUser($userName);
         expect($this->flipper->isActive($featureName, $user->getFlipperIdentifier()))->toBe(false);
+    }
+
+    /**
+     * @When current date is :dateString
+     */
+    public function currentDateIs($dateString)
+    {
+        CurrentDateTime::modifyDate(new \DateTime($dateString));
+    }
+
+    /**
+     * @Then the feature :featureName should be active
+     */
+    public function theFeatureShouldBeActive($featureName)
+    {
+        expect($this->flipper->isActive($featureName, new Flipper\Identifier('foo')))->toBe(true);
+    }
+
+    /**
+     * @Then the feature :featureName should not be active
+     */
+    public function theFeatureShouldNotBeActive($featureName)
+    {
+        expect($this->flipper->isActive($featureName, new Flipper\Identifier('foo')))->toBe(false);
     }
 
     /**

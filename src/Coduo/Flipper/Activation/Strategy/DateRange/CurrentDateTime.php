@@ -22,6 +22,11 @@ final class CurrentDateTime extends DateTime
         self::$modifiedDate = $date;
     }
 
+    public static function reset()
+    {
+        self::$modifiedDate = null;
+    }
+
     /**
      *
      */
