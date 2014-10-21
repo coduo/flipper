@@ -56,4 +56,9 @@ class DateRangeSpec extends ObjectBehavior
         $date = new \DateTime("2014-10-15 18:00:00");
         CurrentDateTime::modifyDate($date);
     }
+
+    function letgo()
+    {
+        CurrentDateTime::reset();
+    }
 }
