@@ -6,7 +6,7 @@ use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
 
-class Gradual implements Strategy
+final class Gradual implements Strategy
 {
     /**
      * @var int

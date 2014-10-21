@@ -6,7 +6,7 @@ use Coduo\Flipper\Feature;
 use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Identifier;
 
-class UserIdentifier implements Strategy
+final class UserIdentifier implements Strategy
 {
     /**
      * @var Identifier[]

@@ -7,7 +7,7 @@ use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
 use Coduo\Flipper\User\FeatureAwareUser;
 
-class Flipper
+final class Flipper
 {
     /**
      * @var Flipper\Feature\Repository

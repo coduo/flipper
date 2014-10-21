@@ -6,7 +6,7 @@ use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
 
-class SystemWide implements Strategy
+final class SystemWide implements Strategy
 {
     /**
      * @var boolean

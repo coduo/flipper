@@ -8,7 +8,7 @@ use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
 
-class DateRange implements Strategy
+final class DateRange implements Strategy
 {
     /**
      * @var DateTime
