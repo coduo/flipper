@@ -26,34 +26,16 @@ $flipper->add($feature);
 $flipper->add($feature2)
 ```
 
-## Set up your feature aware user
-
-```php
-<?php
-use Coduo\Flipper\Identifier;
-use Coduo\Flipper\User\FeatureAwareUser;
-
-class Customer implements FeatureAwareUser, UserInterface
-{
-
-    ...
-    
-    public function getFlipperIdentifier()
-    {
-        return new Identifier($this->getUsername());
-    }
-}
-```
 
 ## Check it
 ```php
 <?php
 $customer = Customer::fromEmail('michal@coduo.pl');
 $customer2 = Customer::fromEmail('norbert@coduo.pl');
-$flipper->isActive('captcha', $customer); #true
-$flipper->isActive('captcha', $customer); #false
-$flipper->isActive('new_topbar', $customer); #true
-$flipper->isActive('new_topbar', $customer2); #true
+$flipper->isActive('captcha', new Identifier($customer->getEmail()); #true
+$flipper->isActive('captcha', new Identifier($customer->getEmail()); #false
+$flipper->isActive('new_topbar', new Identifier($customer->getEmail()); #true
+$flipper->isActive('new_topbar', new Identifier($customer->getEmail()); #true
 ```
 
 ```

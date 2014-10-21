@@ -5,7 +5,7 @@ namespace Coduo\Tests\Flipper;
 use Coduo\Flipper\Identifier;
 use Coduo\Flipper\User\FeatureAwareUser;
 
-class TestUser implements FeatureAwareUser
+class TestUser
 {
 
     private $id;
