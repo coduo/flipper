@@ -5,7 +5,7 @@ flipper
 
 
 WIP
-Simple and extensive feature flipper for php. User centric.
+Simple and extensive feature flipper for php. Identifier centric.
 
 ## Set up your feature definitions
 

@@ -4,12 +4,12 @@ Feature: Toggling features for a date range
   I want to be able toggle features withing a date range
 
   Background:
-    Given the "holiday_break" feature exist for range "2014-12-24 08:00:00" - "2014-12-31 18:00:00"
+    Given the "holiday break" feature exist for range "2014-12-24 08:00:00" - "2014-12-31 18:00:00"
 
   Scenario: Activating features within valid date range
     When current date is "2014-12-25 14:00:00"
-    Then the feature "holiday_break" should be active
+    Then the feature "holiday break" should be active
 
   Scenario: Activating features outside valid date range
     When current date is "2014-12-23 14:00:00"
-    Then the feature "holiday_break" should not be active
+    Then the feature "holiday break" should not be active
