@@ -4,9 +4,9 @@ Feature: Toggling features for percentage of users
   I want to be able toggle features for percentage of users users
 
   Scenario Outline: Activating features for percentage of users
-    When there are <usersCount> users
-    Then I set up feature <feature> for <percentage> percent of users
-    And about <estTotal> users should see the feature
+    Given there are <usersCount> users
+    When I set up feature <feature> for <percentage> percent of users
+    Then about <estTotal> users should see the feature
 
   Examples:
     | usersCount | feature   | percentage | estTotal   |
