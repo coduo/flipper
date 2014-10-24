@@ -3,7 +3,6 @@
 namespace Coduo\Flipper;
 
 use Coduo\Flipper\Activation\Strategy;
-use Coduo\Flipper\User\FeatureAwareUser;
 
 class Feature
 {
@@ -28,7 +27,7 @@ class Feature
     }
 
     /**
-     * @return sting
+     * @return string
      */
     public function getName()
     {

@@ -24,7 +24,7 @@ class DateTime
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -32,7 +32,7 @@ class DateTime
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getTimestamp()
     {
@@ -40,7 +40,7 @@ class DateTime
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function __toString()
     {

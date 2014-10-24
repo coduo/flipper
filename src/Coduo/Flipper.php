@@ -5,7 +5,6 @@ namespace Coduo;
 use Coduo\Flipper\Feature\Repository;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
-use Coduo\Flipper\User\FeatureAwareUser;
 
 final class Flipper
 {
@@ -32,7 +31,7 @@ final class Flipper
 
     /**
      * @param $name
-     * @return mixed
+     * @return Feature|null
      */
     public function findByName($name)
     {

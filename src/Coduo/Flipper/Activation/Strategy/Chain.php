@@ -37,7 +37,7 @@ class Chain implements Strategy
     }
 
     /**
-     * @return array|\Coduo\Flipper\Activation\Strategy[]
+     * @return []
      */
     public function getStrategies()
     {
