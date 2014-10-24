@@ -8,7 +8,7 @@ use Coduo\Flipper\Identifier;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ChainSpec extends ObjectBehavior
+final class ChainSpec extends ObjectBehavior
 {
     function let(Strategy $strategy1, Strategy $strategy2)
     {
@@ -42,5 +42,13 @@ class ChainSpec extends ObjectBehavior
         $strategy2->isActive($feature, $id)->willReturn(true);
         $strategy3->isActive($feature, $id)->willReturn(false);
         $this->isActive($feature, $id)->shouldReturn(true);
+    }
+
+    function it_is_not_active_when_non_of_strategies_arent_active(Strategy $strategy1, Strategy $strategy2, Feature $feature)
+    {
+        $id = new Identifier('michal@coduo.pl');
+        $strategy1->isActive($feature, $id)->willReturn(false);
+        $strategy2->isActive($feature, $id)->willReturn(false);
+        $this->isActive($feature, $id)->shouldReturn(false);
     }
 }
