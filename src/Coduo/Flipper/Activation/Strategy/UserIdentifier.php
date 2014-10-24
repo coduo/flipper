@@ -25,6 +25,7 @@ final class UserIdentifier implements Strategy
                 throw new \InvalidArgumentException("Only instance of Identifier is accepted by UserIdentifier strategy");
             }
         }
+
         $this->identifiers = $identifiers;
     }
 

@@ -83,8 +83,8 @@ class DateRangeSpec extends ObjectBehavior
      */
     function it_can_check_if_feature_has_ended_negatively(Feature $feature)
     {
-        $this->beConstructedWith(new DateTime("2014-10-15 19:00:00"), new DateTime("2014-10-15 21:00:00"));
-        $this->hasEnded()->shouldReturn(true);
+        $this->beConstructedWith(new DateTime("2014-10-15 16:00:00"), new DateTime("2014-10-15 17:00:00"));
+        $this->hasEnded()->shouldReturn(false);
     }
 
     function modifyCurrentDate()
