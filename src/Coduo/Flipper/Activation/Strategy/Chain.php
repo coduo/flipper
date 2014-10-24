@@ -14,7 +14,7 @@ class Chain implements Strategy
     private $strategies;
 
     /**
-     * @param array $strategies
+     * @param Strategy[] $strategies
      * @throws \InvalidArgumentException
      */
     public function __construct(array $strategies = array())
@@ -37,7 +37,7 @@ class Chain implements Strategy
     }
 
     /**
-     * @return []
+     * @return Strategy[]
      */
     public function getStrategies()
     {

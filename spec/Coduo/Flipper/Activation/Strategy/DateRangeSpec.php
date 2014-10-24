@@ -51,6 +51,42 @@ class DateRangeSpec extends ObjectBehavior
         $this->isActive($feature, new Identifier('michal'))->shouldReturn(false);
     }
 
+    /**
+     * @before modifyCurrentDate
+     */
+    function it_can_check_if_feature_has_started_positively(Feature $feature)
+    {
+        $this->beConstructedWith(new DateTime("2014-10-15 17:00:00"), new DateTime("2014-10-15 21:00:00"));
+        $this->hasStared()->shouldReturn(true);
+    }
+
+    /**
+     * @before modifyCurrentDate
+     */
+    function it_can_check_if_feature_has_started_negatively(Feature $feature)
+    {
+        $this->beConstructedWith(new DateTime("2014-10-15 19:00:00"), new DateTime("2014-10-15 21:00:00"));
+        $this->hasStared()->shouldReturn(false);
+    }
+
+    /**
+     * @before modifyCurrentDate
+     */
+    function it_can_check_if_feature_has_ended_positively(Feature $feature)
+    {
+        $this->beConstructedWith(new DateTime("2014-10-15 17:00:00"), new DateTime("2014-10-15 21:00:00"));
+        $this->hasEnded()->shouldReturn(true);
+    }
+
+    /**
+     * @before modifyCurrentDate
+     */
+    function it_can_check_if_feature_has_ended_negatively(Feature $feature)
+    {
+        $this->beConstructedWith(new DateTime("2014-10-15 19:00:00"), new DateTime("2014-10-15 21:00:00"));
+        $this->hasEnded()->shouldReturn(true);
+    }
+
     function modifyCurrentDate()
     {
         $date = new \DateTime("2014-10-15 18:00:00");
