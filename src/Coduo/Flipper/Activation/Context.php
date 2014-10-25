@@ -4,6 +4,8 @@ namespace Coduo\Flipper\Activation;
 
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\User\Identifier as UserIdentifier;
+use Coduo\Flipper\Environment\Identifier as EnvironmentIdentifier;
+
 
 class Context
 {
@@ -17,6 +19,11 @@ class Context
     public function __construct(UserIdentifier $identifier)
     {
         $this->identifier = $identifier;
+    }
+
+    public function registerCurrentEnvironment(EnvironmentIdentifier $environment)
+    {
+        $this->environment = $environment;
     }
 
     public function getUserIdentifier()
