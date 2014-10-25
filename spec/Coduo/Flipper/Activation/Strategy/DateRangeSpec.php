@@ -2,10 +2,10 @@
 
 namespace spec\Coduo\Flipper\Activation\Strategy;
 
+use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Activation\Strategy\DateRange\CurrentDateTime;
 use Coduo\Flipper\Activation\Strategy\DateRange\DateTime;
 use Coduo\Flipper\Feature;
-use Coduo\Flipper\Identifier;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -30,7 +30,7 @@ class DateRangeSpec extends ObjectBehavior
     function it_checks_active_when_its_over(Feature $feature)
     {
         $this->beConstructedWith(new DateTime("2014-10-15 17:00:00"), new DateTime("2014-10-16 19:00:00"));
-        $this->isActive($feature, new Identifier('michal'))->shouldReturn(true);
+        $this->isActive($feature, Context::createFromUserIdentifier('michal'))->shouldReturn(true);
     }
 
     /**
@@ -39,7 +39,7 @@ class DateRangeSpec extends ObjectBehavior
     function it_checks_active_for_invalid_range(Feature $feature)
     {
         $this->beConstructedWith(new DateTime("2014-10-15 16:00:00"), new DateTime("2014-10-15 17:00:00"));
-        $this->isActive($feature, new Identifier('michal'))->shouldReturn(false);
+        $this->isActive($feature, Context::createFromUserIdentifier('michal'))->shouldReturn(false);
     }
 
     /**
@@ -48,7 +48,7 @@ class DateRangeSpec extends ObjectBehavior
     function it_checks_active_when_its_hasnt_started_yet(Feature $feature)
     {
         $this->beConstructedWith(new DateTime("2014-10-15 19:00:00"), new DateTime("2014-10-15 21:00:00"));
-        $this->isActive($feature, new Identifier('michal'))->shouldReturn(false);
+        $this->isActive($feature, Context::createFromUserIdentifier('michal'))->shouldReturn(false);
     }
 
     /**

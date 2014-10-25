@@ -2,6 +2,7 @@
 
 namespace Coduo\Flipper\Activation\Strategy;
 
+use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Activation\Strategy\DateRange\CurrentDateTime;
 use Coduo\Flipper\Activation\Strategy\DateRange\DateTime;
 use Coduo\Flipper\Activation\Strategy;
@@ -38,7 +39,7 @@ final class DateRange implements Strategy
     /**
      * {@inheritdoc}
      */
-    public function isActive(Feature $feature, Identifier $identifier)
+    public function isActive(Feature $feature, Context $context)
     {
         $now = new CurrentDateTime();
         return $now->isGreaterEqualThan($this->from) && $now->isLesserEqualThan($this->to);
