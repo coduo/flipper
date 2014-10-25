@@ -2,6 +2,7 @@
 
 namespace Coduo\Flipper\Activation\Strategy;
 
+use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
@@ -24,9 +25,9 @@ final class Gradual implements Strategy
     /**
      * {@inheritdoc}
      */
-    public function isActive(Feature $feature, Identifier $identifier)
+    public function isActive(Feature $feature, Context $context)
     {
-        return abs(crc32((String)$identifier) % 100) < $this->percentage;
+        return abs(crc32((String) $context->getUserIdentifier()) % 100) < $this->percentage;
     }
 
     /**

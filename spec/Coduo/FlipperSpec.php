@@ -2,6 +2,7 @@
 
 namespace spec\Coduo;
 
+use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature\Repository;
 use Coduo\Flipper\Feature;
@@ -10,9 +11,9 @@ use Prophecy\Argument;
 
 class FlipperSpec extends ObjectBehavior
 {
-    function let(Repository $repository)
+    function let(Repository $repository, Context $context)
     {
-        $this->beConstructedWith($repository);
+        $this->beConstructedWith($repository, $context);
     }
 
     function it_can_add_new_features(Repository $repository, Strategy $strategy)

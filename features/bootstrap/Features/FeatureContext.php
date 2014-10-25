@@ -133,7 +133,7 @@ class FeatureContext implements SnippetAcceptingContext
     public function theFeatureShouldBeActivateForUser($featureName, $userName)
     {
         $user = $this->findUser($userName);
-        expect($this->flipper->isActive($featureName, $user->getFlipperIdentifier()))->toBe(true);
+        expect($this->flipper->isActive($featureName, new Flipper\Activation\Context($user->getFlipperIdentifier())))->toBe(true);
     }
 
     /**
@@ -142,7 +142,7 @@ class FeatureContext implements SnippetAcceptingContext
     public function theFeatureShouldNotBeActiveForUser($featureName, $userName)
     {
         $user = $this->findUser($userName);
-        expect($this->flipper->isActive($featureName, $user->getFlipperIdentifier()))->toBe(false);
+        expect($this->flipper->isActive($featureName, new Flipper\Activation\Context($user->getFlipperIdentifier())))->toBe(false);
     }
 
     /**
@@ -158,7 +158,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function theFeatureShouldBeActive($featureName)
     {
-        expect($this->flipper->isActive($featureName, new Flipper\Identifier('foo')))->toBe(true);
+        expect($this->flipper->isActive($featureName, Flipper\Activation\Context::createFromUserIdentifier('foo')))->toBe(true);
     }
 
     /**
@@ -166,7 +166,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function theFeatureShouldNotBeActive($featureName)
     {
-        expect($this->flipper->isActive($featureName, new Flipper\Identifier('foo')))->toBe(false);
+        expect($this->flipper->isActive($featureName, Flipper\Activation\Context::createFromUserIdentifier('foo')))->toBe(false);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Coduo\Flipper;
 
-final class Identifier
+class Identifier
 {
     /**
      * @var mixed

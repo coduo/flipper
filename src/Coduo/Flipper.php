@@ -2,6 +2,7 @@
 
 namespace Coduo;
 
+use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Feature\Repository;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
@@ -12,13 +13,18 @@ final class Flipper
      * @var Flipper\Feature\Repository
      */
     private $repository;
+    /**
+     * @var Flipper\Activation\Context
+     */
+    private $context;
 
     /**
      * @param Repository $repository
      */
-    public function __construct(Repository $repository)
+    public function __construct(Repository $repository, Context $context)
     {
         $this->repository = $repository;
+        $this->context = $context;
     }
 
     /**
@@ -40,18 +46,17 @@ final class Flipper
 
     /**
      * @param $featureName
-     * @param Identifier $identifier
      * @throws \RuntimeException
      *
      * @return boolean
      */
-    public function isActive($featureName, Identifier $identifier)
+    public function isActive($featureName)
     {
         $feature = $this->findByName($featureName);
         if (null === $feature) {
             throw new \RuntimeException();
         }
 
-        return $feature->isActive($identifier);
+        return $feature->isActive($this->context);
     }
 }
