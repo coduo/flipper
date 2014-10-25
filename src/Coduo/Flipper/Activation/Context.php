@@ -19,6 +19,7 @@ class Context
     public function __construct(UserIdentifier $identifier)
     {
         $this->identifier = $identifier;
+        $this->environment = new EnvironmentIdentifier('default');
     }
 
     public function registerCurrentEnvironment(EnvironmentIdentifier $environment)
