@@ -13,18 +13,19 @@ final class Flipper
      * @var Flipper\Feature\Repository
      */
     private $repository;
+
     /**
      * @var Flipper\Activation\Context
      */
-    private $context;
+    private $contexts;
 
     /**
      * @param Repository $repository
      */
-    public function __construct(Repository $repository, Context $context)
+    public function __construct(Repository $repository)
     {
         $this->repository = $repository;
-        $this->context = $context;
+        $this->contexts = [];
     }
 
     /**
@@ -33,6 +34,11 @@ final class Flipper
     public function add(Feature $feature)
     {
         $this->repository->add($feature);
+    }
+
+    public function addContext(Context $context)
+    {
+        $this->contexts[] = $context;
     }
 
     /**
@@ -45,18 +51,37 @@ final class Flipper
     }
 
     /**
+     * @param $name
+     * @return Context|null
+     */
+    public function findContextByName($name)
+    {
+        foreach ($this->contexts as $context) {
+            if ($context->getName() === $name) {
+                return $context;
+            }
+        }
+    }
+
+    /**
      * @param $featureName
      * @throws \RuntimeException
      *
      * @return boolean
      */
-    public function isActive($featureName)
+    public function isActive($featureName, $contextName = 'default')
     {
         $feature = $this->findByName($featureName);
         if (null === $feature) {
             throw new \RuntimeException();
         }
 
-        return $feature->isActive($this->context);
+        $context = $this->findContextByName($contextName);
+
+        if (null === $context) {
+            throw new \RuntimeException("Context not found");
+        }
+
+        return $feature->isActive($context);
     }
 }

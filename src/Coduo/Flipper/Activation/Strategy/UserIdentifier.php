@@ -5,17 +5,47 @@ namespace Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Activation\Strategy;
+use Coduo\Flipper\Activation\Argument;
 
-final class UserIdentifier extends Identifier implements Strategy
+final class UserIdentifier implements Strategy
 {
+    /**
+     * @var Argument\UserIdentifier[]
+     */
+    private $supportedUserIdentifiers;
+
+    /**
+     * @param array $supportedUserIdentifiers
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $supportedUserIdentifiers = array())
+    {
+        foreach ($supportedUserIdentifiers as $identifier) {
+            if (false === $identifier instanceof Argument\UserIdentifier) {
+                throw new \InvalidArgumentException("Only instance of UserIdentifier is accepted by UserIdentifier strategy");
+            }
+        }
+
+        $this->supportedUserIdentifiers = $supportedUserIdentifiers;
+    }
+
+    /**
+     * @param \Coduo\Flipper\Activation\Argument\UserIdentifier $supportedIdentifier
+     */
+    public function addIdentifier(Argument\UserIdentifier $supportedIdentifier)
+    {
+        $this->supportedUserIdentifiers[] = $supportedIdentifier;
+    }
 
     /**
      * {@inheritdoc}
      */
     public function isActive(Feature $feature, Context $context)
     {
-        foreach ($this->identifiers as $fid) {
-            if ($context->getUserIdentifier()->isEqualTo($fid)) {
+        $arg = $context->resolveArgument($this);
+
+        foreach ($this->supportedUserIdentifiers as $userIdentifier) {
+            if ($userIdentifier->isEqualTo($arg)) {
 
                 return true;
             }
@@ -24,8 +54,8 @@ final class UserIdentifier extends Identifier implements Strategy
         return false;
     }
 
-    public function supportsClass($class)
+    public function supportsArgument(Argument $argument)
     {
-        return $class === "Coduo\\Flipper\\User\\Identifier";
+        return $argument instanceof Argument\UserIdentifier;
     }
 }

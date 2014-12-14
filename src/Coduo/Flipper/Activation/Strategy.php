@@ -15,4 +15,6 @@ interface Strategy
      * @return boolean
      */
     public function isActive(Feature $feature, Context $context);
+
+    public function supportsArgument(Argument $argument);
 }

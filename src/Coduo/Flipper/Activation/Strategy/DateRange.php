@@ -2,6 +2,7 @@
 
 namespace Coduo\Flipper\Activation\Strategy;
 
+use Coduo\Flipper\Activation\Argument;
 use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Activation\Strategy\DateRange\CurrentDateTime;
 use Coduo\Flipper\Activation\Strategy\DateRange\DateTime;
@@ -55,5 +56,10 @@ final class DateRange implements Strategy
     {
         $now = new CurrentDateTime();
         return $now->isLesserEqualThan($this->to);
+    }
+
+    public function supportsArgument(Argument $argument)
+    {
+        return true;
     }
 }

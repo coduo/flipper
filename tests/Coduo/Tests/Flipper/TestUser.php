@@ -2,8 +2,8 @@
 
 namespace Coduo\Tests\Flipper;
 
+use Coduo\Flipper\Activation\Argument\UserIdentifier;
 use Coduo\Flipper\Identifier;
-use Coduo\Flipper\User\FeatureAwareUser;
 
 class TestUser
 {
@@ -17,6 +17,6 @@ class TestUser
 
     public function getFlipperIdentifier()
     {
-        return new Identifier($this->id);
+        return new UserIdentifier($this->id);
     }
 }

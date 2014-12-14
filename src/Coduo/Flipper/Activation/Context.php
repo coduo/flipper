@@ -3,43 +3,39 @@
 namespace Coduo\Flipper\Activation;
 
 use Coduo\Flipper\Feature;
-use Coduo\Flipper\User\Identifier as UserIdentifier;
-use Coduo\Flipper\Environment\Identifier as EnvironmentIdentifier;
-
 
 class Context
 {
+    private $arguments;
+    private $name;
+
+    public function __construct($name = 'default')
+    {
+        $this->name = $name;
+        $this->arguments = array();
+    }
+
+    public function registerArgument(Argument $argument)
+    {
+        $this->arguments[] = $argument;
+    }
+
+    public function resolveArgument(Strategy $strategy)
+    {
+        foreach ($this->arguments as $argument) {
+            if ($strategy->supportsArgument($argument)) {
+                return $argument;
+            }
+        }
+
+        throw new \RuntimeException(sprintf("Cannot resolve argument for strategy %s. Please make sure you registed all valid arguments", get_class($strategy)));
+    }
+
     /**
-     * @var \Coduo\Flipper\User\Identifier
+     * @return mixed
      */
-    private $identifier;
-
-    private $environment;
-
-    public function __construct(UserIdentifier $identifier)
+    public function getName()
     {
-        $this->identifier = $identifier;
-        $this->environment = new EnvironmentIdentifier('default');
+        return $this->name;
     }
-
-    public function registerCurrentEnvironment(EnvironmentIdentifier $environment)
-    {
-        $this->environment = $environment;
-    }
-
-    public function getUserIdentifier()
-    {
-        return $this->identifier;
-    }
-
-    public function getEnvironmentIdentifier()
-    {
-        return $this->environment;
-    }
-
-    public static function createFromUserIdentifier($identifier)
-    {
-        return new static(new UserIdentifier($identifier));
-    }
-
 }

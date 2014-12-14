@@ -2,6 +2,7 @@
 
 namespace Coduo\Flipper\Activation\Strategy;
 
+use Coduo\Flipper\Activation\Argument;
 use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
@@ -57,5 +58,10 @@ class Chain implements Strategy
         }
 
         return false;
+    }
+
+    public function supportsArgument(Argument $argument)
+    {
+        return true;
     }
 }

@@ -35,6 +35,11 @@ class Feature
         return $this->name;
     }
 
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
+
     /**
      * @param Context $context
      * @return bool
