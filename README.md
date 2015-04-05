@@ -7,48 +7,38 @@ flipper
 WIP
 Simple and extensive feature flipper for php. Identifier centric.
 
-## Set up your feature definitions
+## Create a context and register your arguments in context
 
 ```php
 <?php
 use Coduo\Flipper;
-use Coduo\Flipper\Context;
-use Coduo\Flipper\Identifier;
-use Coduo\Flipper\Feature;
 use Coduo\Flipper\Feature\Repository\InMemoryFeatureRepository;
 use Coduo\Flipper\Activation\Strategy;
 
-$context = new Context('default');
-$context->registerArgumentResolver(Resolver\UserIdentifier); #returns michal@coduo.pl
-$context->registerArgumentResolver(Resolver\Environment); #returns staging
+$context = new Flipper\Activation\Context('default');
+$context2 = new Flipper\Activation\Context('some_dummy_context');
+$context->registerArgument(new Flipper\Activation\Argument\UserIdentifier('michal@coduo.pl');
+```php
 
-$context2 = new Context('other');
-$context2->registerArgumentResolver(Resolver\UserIdentifier); #returns norbert@coduo.pl
+## Set up your feature definitions
 
 $flipper = new Flipper(new InMemoryFeatureRepository());
-$flipper->addContext($context);
-$flipper->addContext($context2);
-
+$flipper->addContext($this->context);
 
 $feature = new Feature('captcha', new Strategy\UserIdentifier(
-    new Identifier('michal@coduo.pl')
+    new Flipper\Activation\Argument\UserIdentifier('michal@coduo.pl')
 ]));
 
 $feature2 = new Feature('new_topbar', new Strategy\SystemWide(true));
 $flipper->add($feature);
 $flipper->add($feature2);
-
-
-#all set up
-
 ```
-
 
 ## Check it
 ```php
 <?php
 $flipper->isActive('captcha', 'default'); #true
-$flipper->isActive('captcha', 'other'); #false
+$flipper->isActive('captcha', 'Argument'); #false
 
 ```
 
