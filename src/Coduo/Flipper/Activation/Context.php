@@ -20,6 +20,19 @@ class Context
         $this->arguments[] = $argument;
     }
 
+    /**
+     * @return array
+     */
+    public function getArguments()
+    {
+        return $this->arguments;
+    }
+
+    public function clear()
+    {
+        $this->arguments = [];
+    }
+
     public function resolveArgument(Strategy $strategy)
     {
         foreach ($this->arguments as $argument) {
@@ -28,7 +41,7 @@ class Context
             }
         }
 
-        throw new \RuntimeException(sprintf("Cannot resolve argument for strategy %s. Please make sure you registed all valid arguments", get_class($strategy)));
+        throw new \RuntimeException(sprintf("Cannot resolve argument for strategy %s. Please make sure you registered all valid arguments", get_class($strategy)));
     }
 
     /**

@@ -15,8 +15,8 @@ class TestUser
         $this->id = $id;
     }
 
-    public function getFlipperIdentifier()
+    public function getId()
     {
-        return new UserIdentifier($this->id);
+        return $this->id;
     }
 }

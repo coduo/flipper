@@ -16,5 +16,12 @@ interface Strategy
      */
     public function isActive(Feature $feature, Context $context);
 
+
+    /**
+     * Checks if given argument is supported by strategy
+     *
+     * @param Argument $argument
+     * @return mixed
+     */
     public function supportsArgument(Argument $argument);
 }

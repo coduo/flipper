@@ -46,18 +46,27 @@ final class DateRange implements Strategy
         return $now->isGreaterEqualThan($this->from) && $now->isLesserEqualThan($this->to);
     }
 
+    /**
+     * @return bool
+     */
     public function hasStared()
     {
         $now = new CurrentDateTime();
         return $now->isGreaterEqualThan($this->from);
     }
 
+    /**
+     * @return bool
+     */
     public function hasEnded()
     {
         $now = new CurrentDateTime();
         return $now->isLesserEqualThan($this->to);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supportsArgument(Argument $argument)
     {
         return true;
