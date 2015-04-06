@@ -14,7 +14,7 @@ final class Flipper
     private $repository;
 
     /**
-     * @var Flipper\Activation\Context
+     * @var Flipper\Activation\Context[]
      */
     private $contexts;
 
@@ -35,6 +35,9 @@ final class Flipper
         $this->repository->add($feature);
     }
 
+    /**
+     * @param Context $context
+     */
     public function addContext(Context $context)
     {
         $this->contexts[] = $context;
@@ -63,7 +66,8 @@ final class Flipper
     }
 
     /**
-     * @param $featureName
+     * @param string $featureName
+     * @param string $contextName
      * @throws \RuntimeException
      *
      * @return boolean
