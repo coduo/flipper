@@ -30,7 +30,7 @@ class Context
 
     public function clear()
     {
-        $this->arguments = [];
+        $this->arguments = array();
     }
 
     public function resolveArgument(Strategy $strategy)

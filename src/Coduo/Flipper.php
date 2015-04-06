@@ -25,7 +25,7 @@ final class Flipper
     public function __construct(Repository $repository)
     {
         $this->repository = $repository;
-        $this->contexts = [];
+        $this->contexts = array();
     }
 
     /**
