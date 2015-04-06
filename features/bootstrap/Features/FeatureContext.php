@@ -23,10 +23,13 @@ class FeatureContext implements SnippetAcceptingContext
     private $flipper;
     private $users;
     private $currentFeature;
+    private $context;
 
     public function __construct()
     {
+        $this->context = new Flipper\Activation\Context('default');
         $this->flipper = new Flipper(new InMemoryFeatureRepository());
+        $this->flipper->addContext($this->context);
         $this->users = array();
     }
 
@@ -36,6 +39,7 @@ class FeatureContext implements SnippetAcceptingContext
     public function clenup(BeforeScenarioScope $scope)
     {
         $this->flipper = new Flipper(new InMemoryFeatureRepository());
+        $this->flipper->addContext($this->context);
         $this->users = array();
         CurrentDateTime::reset();
     }
@@ -72,7 +76,7 @@ class FeatureContext implements SnippetAcceptingContext
             $feature = new Feature($featureData['Feature'], $strategy);
             foreach (explode(',', $featureData['Users']) as $userName) {
                 $user = $this->findUser(trim($userName));
-                $strategy->addIdentifier($user->getFlipperIdentifier());
+                $strategy->addIdentifier(new Flipper\Activation\Argument\UserIdentifier($user->getId()));
             }
 
             $this->flipper->add($feature);
@@ -110,9 +114,11 @@ class FeatureContext implements SnippetAcceptingContext
         $activated = 0;
 
         foreach ($this->users as $user) {
-            if ($this->flipper->isActive($this->currentFeature->getName(), $user->getFlipperIdentifier())) {
+            $this->context->registerArgument(new Flipper\Activation\Argument\UserIdentifier($user->getId()));
+            if ($this->flipper->isActive($this->currentFeature->getName(), $this->context->getName())) {
                 $activated++;
             }
+            $this->context->clear();
         }
 
         $thresholdLower = array($activated - ($activated * 0.10), $count - ($count * 0.10));
@@ -133,7 +139,9 @@ class FeatureContext implements SnippetAcceptingContext
     public function theFeatureShouldBeActivateForUser($featureName, $userName)
     {
         $user = $this->findUser($userName);
-        expect($this->flipper->isActive($featureName, $user->getFlipperIdentifier()))->toBe(true);
+        $this->context->clear();
+        $this->context->registerArgument(new Flipper\Activation\Argument\UserIdentifier($userName));
+        expect($this->flipper->isActive($featureName))->toBe(true);
     }
 
     /**
@@ -142,7 +150,9 @@ class FeatureContext implements SnippetAcceptingContext
     public function theFeatureShouldNotBeActiveForUser($featureName, $userName)
     {
         $user = $this->findUser($userName);
-        expect($this->flipper->isActive($featureName, $user->getFlipperIdentifier()))->toBe(false);
+        $this->context->clear();
+        $this->context->registerArgument(new Flipper\Activation\Argument\UserIdentifier($userName));
+        expect($this->flipper->isActive($featureName))->toBe(false);
     }
 
     /**
@@ -158,7 +168,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function theFeatureShouldBeActive($featureName)
     {
-        expect($this->flipper->isActive($featureName, new Flipper\Identifier('foo')))->toBe(true);
+        expect($this->flipper->isActive($featureName))->toBe(true);
     }
 
     /**
@@ -166,7 +176,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function theFeatureShouldNotBeActive($featureName)
     {
-        expect($this->flipper->isActive($featureName, new Flipper\Identifier('foo')))->toBe(false);
+        expect($this->flipper->isActive($featureName))->toBe(false);
     }
 
     /**
@@ -175,7 +185,7 @@ class FeatureContext implements SnippetAcceptingContext
     protected function findUser($userName)
     {
         foreach ($this->users as $user) {
-            if ((String) $user->getFlipperIdentifier() === $userName) {
+            if ((String) $user->getId() === $userName) {
                 return $user;
             }
         }

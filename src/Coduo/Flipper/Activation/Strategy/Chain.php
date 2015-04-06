@@ -2,6 +2,8 @@
 
 namespace Coduo\Flipper\Activation\Strategy;
 
+use Coduo\Flipper\Activation\Argument;
+use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Identifier;
@@ -47,14 +49,19 @@ class Chain implements Strategy
     /**
      * {@inheritdoc}
      */
-    public function isActive(Feature $feature, Identifier $identifier)
+    public function isActive(Feature $feature, Context $context)
     {
         foreach ($this->strategies as $strategy) {
-            if ($strategy->isActive($feature, $identifier)) {
+            if ($strategy->isActive($feature, $context)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public function supportsArgument(Argument $argument)
+    {
+        return true;
     }
 }

@@ -7,35 +7,39 @@ flipper
 WIP
 Simple and extensive feature flipper for php. Identifier centric.
 
-## Set up your feature definitions
+## Create a context and register your arguments in context
 
 ```php
 <?php
 use Coduo\Flipper;
-use Coduo\Flipper\Identifier;
-use Coduo\Flipper\Feature;
 use Coduo\Flipper\Feature\Repository\InMemoryFeatureRepository;
 use Coduo\Flipper\Activation\Strategy;
 
-$flipper = new Flipper(new InMemoryFeatureRepository())
+$context = new Flipper\Activation\Context('default');
+$context2 = new Flipper\Activation\Context('some_dummy_context');
+$context->registerArgument(new Flipper\Activation\Argument\UserIdentifier('michal@coduo.pl');
+```php
+
+## Set up your feature definitions
+
+$flipper = new Flipper(new InMemoryFeatureRepository());
+$flipper->addContext($this->context);
+
 $feature = new Feature('captcha', new Strategy\UserIdentifier(
-    new Identifier('michal@coduo.pl')
+    new Flipper\Activation\Argument\UserIdentifier('michal@coduo.pl')
 ]));
+
 $feature2 = new Feature('new_topbar', new Strategy\SystemWide(true));
 $flipper->add($feature);
-$flipper->add($feature2)
+$flipper->add($feature2);
 ```
-
 
 ## Check it
 ```php
 <?php
-$customer = Customer::fromEmail('michal@coduo.pl');
-$customer2 = Customer::fromEmail('norbert@coduo.pl');
-$flipper->isActive('captcha', new Identifier($customer->getEmail()); #true
-$flipper->isActive('captcha', new Identifier($customer->getEmail()); #false
-$flipper->isActive('new_topbar', new Identifier($customer->getEmail()); #true
-$flipper->isActive('new_topbar', new Identifier($customer->getEmail()); #true
+$flipper->isActive('captcha', 'default'); #true
+$flipper->isActive('captcha', 'Argument'); #false
+
 ```
 
 ```

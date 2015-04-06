@@ -2,53 +2,60 @@
 
 namespace Coduo\Flipper\Activation\Strategy;
 
+use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Feature;
 use Coduo\Flipper\Activation\Strategy;
-use Coduo\Flipper\Identifier;
+use Coduo\Flipper\Activation\Argument;
 
 final class UserIdentifier implements Strategy
 {
     /**
-     * @var Identifier[]
+     * @var Argument\UserIdentifier[]
      */
-    private $identifiers;
+    private $supportedUserIdentifiers;
 
     /**
-     * @param Identifier[] $identifiers
-     *
+     * @param array $supportedUserIdentifiers
      * @throws \InvalidArgumentException
      */
-    public function __construct(array $identifiers = array())
+    public function __construct(array $supportedUserIdentifiers = array())
     {
-        foreach ($identifiers as $identifier) {
-            if (false === $identifier instanceof Identifier) {
-                throw new \InvalidArgumentException("Only instance of Identifier is accepted by UserIdentifier strategy");
+        foreach ($supportedUserIdentifiers as $identifier) {
+            if (false === $identifier instanceof Argument\UserIdentifier) {
+                throw new \InvalidArgumentException("Only instance of UserIdentifier is accepted by UserIdentifier strategy");
             }
         }
 
-        $this->identifiers = $identifiers;
+        $this->supportedUserIdentifiers = $supportedUserIdentifiers;
     }
 
     /**
-     * @param Identifier $identifier
+     * @param \Coduo\Flipper\Activation\Argument\UserIdentifier $supportedIdentifier
      */
-    public function addIdentifier(Identifier $identifier)
+    public function addIdentifier(Argument\UserIdentifier $supportedIdentifier)
     {
-        $this->identifiers[] = $identifier;
+        $this->supportedUserIdentifiers[] = $supportedIdentifier;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isActive(Feature $feature, Identifier $identifier)
+    public function isActive(Feature $feature, Context $context)
     {
-        foreach ($this->identifiers as $fid) {
-            if ($identifier->isEqualTo($fid)) {
+        $arg = $context->resolveArgument($this);
+
+        foreach ($this->supportedUserIdentifiers as $userIdentifier) {
+            if ($userIdentifier->isEqualTo($arg)) {
 
                 return true;
             }
         }
 
         return false;
+    }
+
+    public function supportsArgument(Argument $argument)
+    {
+        return $argument instanceof Argument\UserIdentifier;
     }
 }

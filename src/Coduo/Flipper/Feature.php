@@ -2,6 +2,7 @@
 
 namespace Coduo\Flipper;
 
+use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Activation\Strategy;
 
 class Feature
@@ -34,12 +35,17 @@ class Feature
         return $this->name;
     }
 
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
+
     /**
-     * @param Identifier $identifier
+     * @param Context $context
      * @return bool
      */
-    public function isActive(Identifier $identifier)
+    public function isActive(Context $context)
     {
-        return $this->strategy->isActive($this, $identifier);
+        return $this->strategy->isActive($this, $context);
     }
 }
