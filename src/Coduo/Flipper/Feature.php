@@ -41,7 +41,7 @@ class Feature
     }
 
     /**
-     * @param Context $context
+     * @param  Context $context
      * @return bool
      */
     public function isActive(Context $context)

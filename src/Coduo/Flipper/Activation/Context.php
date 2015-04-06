@@ -2,8 +2,6 @@
 
 namespace Coduo\Flipper\Activation;
 
-use Coduo\Flipper\Feature;
-
 class Context
 {
     private $arguments;

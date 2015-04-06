@@ -8,7 +8,6 @@ use Coduo\Flipper\Activation\Strategy\DateRange\CurrentDateTime;
 use Coduo\Flipper\Activation\Strategy\DateRange\DateTime;
 use Coduo\Flipper\Activation\Strategy;
 use Coduo\Flipper\Feature;
-use Coduo\Flipper\Identifier;
 
 final class DateRange implements Strategy
 {
@@ -23,8 +22,8 @@ final class DateRange implements Strategy
     private $to;
 
     /**
-     * @param DateTime $from
-     * @param DateTime $to
+     * @param  DateTime                  $from
+     * @param  DateTime                  $to
      * @throws \InvalidArgumentException
      */
     public function __construct(DateTime $from, DateTime $to)
@@ -43,6 +42,7 @@ final class DateRange implements Strategy
     public function isActive(Feature $feature, Context $context)
     {
         $now = new CurrentDateTime();
+
         return $now->isGreaterEqualThan($this->from) && $now->isLesserEqualThan($this->to);
     }
 
@@ -52,6 +52,7 @@ final class DateRange implements Strategy
     public function hasStared()
     {
         $now = new CurrentDateTime();
+
         return $now->isGreaterEqualThan($this->from);
     }
 
@@ -61,6 +62,7 @@ final class DateRange implements Strategy
     public function hasEnded()
     {
         $now = new CurrentDateTime();
+
         return $now->isLesserEqualThan($this->to);
     }
 

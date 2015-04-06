@@ -5,7 +5,6 @@ namespace Coduo;
 use Coduo\Flipper\Activation\Context;
 use Coduo\Flipper\Feature\Repository;
 use Coduo\Flipper\Feature;
-use Coduo\Flipper\Identifier;
 
 final class Flipper
 {

@@ -2,7 +2,6 @@
 
 namespace Coduo\Flipper\Activation\Strategy\DateRange;
 
-
 class DateTime
 {
     /**
@@ -48,7 +47,7 @@ class DateTime
     }
 
     /**
-     * @param DateTime $date
+     * @param  DateTime $date
      * @return bool
      */
     public function isLesserThan(DateTime $date)
@@ -57,7 +56,7 @@ class DateTime
     }
 
     /**
-     * @param DateTime $date
+     * @param  DateTime $date
      * @return bool
      */
     public function isLesserEqualThan(DateTime $date)
@@ -66,7 +65,7 @@ class DateTime
     }
 
     /**
-     * @param DateTime $date
+     * @param  DateTime $date
      * @return bool
      */
     public function isGreaterThan(DateTime $date)
@@ -75,7 +74,7 @@ class DateTime
     }
 
     /**
-     * @param DateTime $date
+     * @param  DateTime $date
      * @return bool
      */
     public function isGreaterEqualThan(DateTime $date)

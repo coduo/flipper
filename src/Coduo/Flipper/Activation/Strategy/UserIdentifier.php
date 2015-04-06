@@ -15,7 +15,7 @@ final class UserIdentifier implements Strategy
     private $supportedUserIdentifiers;
 
     /**
-     * @param array $supportedUserIdentifiers
+     * @param  array                     $supportedUserIdentifiers
      * @throws \InvalidArgumentException
      */
     public function __construct(array $supportedUserIdentifiers = array())
@@ -46,7 +46,6 @@ final class UserIdentifier implements Strategy
 
         foreach ($this->supportedUserIdentifiers as $userIdentifier) {
             if ($userIdentifier->isEqualTo($arg)) {
-
                 return true;
             }
         }

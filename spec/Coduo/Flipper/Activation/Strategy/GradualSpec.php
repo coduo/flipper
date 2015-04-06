@@ -22,7 +22,7 @@ class GradualSpec extends ObjectBehavior
     {
         $this->beConstructedWith(0);
 
-        foreach ([0, 10, 50, 99, 100] as $id) {
+        foreach (array(0, 10, 50, 99, 100) as $id) {
             $context->resolveArgument(Argument::any())->willReturn(new UserIdentifier($id));
             $this->isActive($feature, $context)->shouldReturn(false);
         }
@@ -32,7 +32,7 @@ class GradualSpec extends ObjectBehavior
     {
         $this->beConstructedWith(100);
 
-        foreach ([0, 10, 50, 99, 100] as $id) {
+        foreach (array(0, 10, 50, 99, 100) as $id) {
             $context->resolveArgument(Argument::any())->willReturn(new UserIdentifier($id));
             $this->isActive($feature, $context)->shouldReturn(true);
         }

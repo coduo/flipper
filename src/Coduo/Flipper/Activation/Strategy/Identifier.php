@@ -10,7 +10,7 @@ abstract class Identifier
      * @var Identifier[]
      */
 
-    protected  $identifiers;
+    protected $identifiers;
 
     /**
      * @param Identifier[] $identifiers
