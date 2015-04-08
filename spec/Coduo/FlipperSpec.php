@@ -28,7 +28,6 @@ class FlipperSpec extends ObjectBehavior
     function it_can_find_features_from_its_repository(Repository $repository, Strategy $strategy)
     {
         $feature = new Feature('captcha', $strategy->getWrappedObject());
-        $this->add($feature);
         $repository->findByName('captcha')->willReturn($feature);
         $this->findByName('captcha')->shouldReturn($feature);
     }
@@ -42,7 +41,6 @@ class FlipperSpec extends ObjectBehavior
     function it_throws_exception_when_given_context_is_not_found(Repository $repository, Strategy $strategy)
     {
         $feature = new Feature('captcha', $strategy->getWrappedObject());
-        $this->add($feature);
         $repository->findByName('captcha')->willReturn($feature);
         $this->shouldThrow(new ContextNotFoundException("Context with name 'fffuuuu' was not found."))
             ->during('isActive', array('captcha', 'fffuuuu'));
