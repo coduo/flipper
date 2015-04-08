@@ -3,6 +3,8 @@
 namespace Coduo;
 
 use Coduo\Flipper\Activation\Context;
+use Coduo\Flipper\Exception\ContextNotFoundException;
+use Coduo\Flipper\Exception\FeatureNotFoundException;
 use Coduo\Flipper\Feature\Repository;
 use Coduo\Flipper\Feature;
 
@@ -68,21 +70,21 @@ final class Flipper
     /**
      * @param string $featureName
      * @param string $contextName
-     * @throws \RuntimeException
-     *
+     * @throws Flipper\Exception\ContextNotFoundException
+     * @throws Flipper\Exception\FeatureNotFoundException
      * @return boolean
      */
     public function isActive($featureName, $contextName = 'default')
     {
         $feature = $this->findByName($featureName);
         if (null === $feature) {
-            throw new \RuntimeException();
+            throw new FeatureNotFoundException(sprintf("Feature '%s' was not found.", $featureName));
         }
 
         $context = $this->findContextByName($contextName);
 
         if (null === $context) {
-            throw new \RuntimeException("Context not found");
+            throw new ContextNotFoundException(sprintf("Context with name '%s' was not found.", $contextName));
         }
 
         return $feature->isActive($context);
