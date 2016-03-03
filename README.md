@@ -18,10 +18,11 @@ use Coduo\Flipper\Activation\Strategy;
 $context = new Flipper\Activation\Context('default');
 $context2 = new Flipper\Activation\Context('some_dummy_context');
 $context->registerArgument(new Flipper\Activation\Argument\UserIdentifier('michal@coduo.pl');
-```php
+```
+
 
 ## Set up your feature definitions
-
+```php
 $flipper = new Flipper(new InMemoryFeatureRepository());
 $flipper->addContext($this->context);
 
